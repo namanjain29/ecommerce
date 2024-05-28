@@ -10,7 +10,7 @@
 //     discountCode: string,
 //     totalBillAmount: number,
 //     discount: number,
-//     billAmount: number,
+//     finalBillAmount: number,
 //     shippingAddress: {
 //         address: string,
 //         city: string,

@@ -10,7 +10,8 @@ const validateHeaders = (headers) => {
   }
   return null;
 }
-
+// for admin routes
+app.use('/internal', internalRoutes)
 router.use('/cart', validateHeaders, cartRoutes);
 router.use('/coupon', validateHeaders, couponRoutes);
 

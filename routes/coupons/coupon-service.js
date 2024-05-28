@@ -4,18 +4,18 @@ const {
 } = require('../../controllers/handlers/coupon')
 const { errorResponse } = require('../../utils/responseUtil')
 
-const getAllCouponsService = async (req, res, next) => {
+const getAllCouponsService = (req, res, next) => {
   try {
-    const data = await getAllCouponsForUser(req)
+    const data = getAllCouponsForUser(req)
     return successResponse(res, data)
   } catch (error) {
     return errorResponse(next, error)
   }
 }
 
-const validateCouponService = async (req, res, next) => {
+const validateCouponService = (req, res, next) => {
   try {
-    const data = await validateCoupon(req)
+    const data = validateCoupon(req)
     return successResponse(res, data)
   } catch (error) {
     return errorResponse(next, error)
