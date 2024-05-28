@@ -1,5 +1,5 @@
 const express = require('express')
-const orderRoutes = require('./orders/order-routes')
+const cartRoutes = require('./cart/cart-routes')
 const couponRoutes = require('./coupons/coupon-routes')
 const router = express.Router()
 const { throwError } = require('../common/errorHandler')
@@ -11,7 +11,7 @@ const validateHeaders = (headers) => {
   return null
 }
 
-router.use('/order', validateHeaders, orderRoutes)
+router.use('/cart', validateHeaders, cartRoutes)
 router.use('/coupon', validateHeaders, couponRoutes)
 
 module.exports = router

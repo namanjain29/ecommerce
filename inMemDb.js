@@ -20,7 +20,7 @@
 //     paymentMethod: string,
 //     status: string,
 // }
-const orders = []
+const orders = [];
 
 // itemsInStore schema
 // {
@@ -61,19 +61,23 @@ const items = [
     price: 500,
     countInStock: 50,
   },
-]
+];
 
-// discountCode schema
+// couponCodes schema
 // {
 //     code: string,
 //     userId: number,
 //     status: string,
 //     discountPercent: number,
 // }
-const discountCodes = []
+const couponCodes = []
+
+
+const cart = [];
 
 module.exports = {
   orders,
   items,
-  discountCodes,
+  couponCodes,
+  cart,
 }
