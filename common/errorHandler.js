@@ -49,8 +49,6 @@ const throwError = (errorMessage, errorCode) => {
   throw error
 }
 
-module.exports = QBError
-
 module.exports = {
   notFoundError,
   onAppError,

@@ -1,5 +1,8 @@
 const { validateSchema } = require('../../utils/validationUtil')
-const { checkoutCartValidationSchema } = require('./cart-validation-schema')
+const {
+  checkoutCartValidationSchema,
+  updateCartValidationSchema,
+} = require('./cart-validation-schema')
 
 const checkoutCartValidation = (req, res, next) => {
   const { body } = req
@@ -7,6 +10,13 @@ const checkoutCartValidation = (req, res, next) => {
   return next()
 }
 
+const updateCartValidation = (req, res, next) => {
+  const { body } = req
+  validateSchema(updateCartValidationSchema, body, res)
+  return next()
+}
+
 module.exports = {
   checkoutCartValidation,
+  updateCartValidation,
 }

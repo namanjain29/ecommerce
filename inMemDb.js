@@ -73,7 +73,17 @@ const items = [
 const couponCodes = []
 
 
-const cart = [];
+// cart Schema
+// { 
+//   userId: [
+//     {
+//       productId: string,
+//       quantity: number,
+//     }
+//   ]
+// }
+
+const cart = {};
 
 module.exports = {
   orders,

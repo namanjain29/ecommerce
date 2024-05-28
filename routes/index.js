@@ -6,12 +6,12 @@ const { throwError } = require('../common/errorHandler')
 
 const validateHeaders = (headers) => {
   if (!headers['user-id']) {
-    return throwError(`Request header does not have user-id`, ERROR_CODE.NOT_FOUND)
+    return throwError(`Request header does not have user-id`, ERROR_CODE.NOT_FOUND);
   }
-  return null
+  return null;
 }
 
-router.use('/cart', validateHeaders, cartRoutes)
-router.use('/coupon', validateHeaders, couponRoutes)
+router.use('/cart', validateHeaders, cartRoutes);
+router.use('/coupon', validateHeaders, couponRoutes);
 
-module.exports = router
+module.exports = router;

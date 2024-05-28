@@ -1,9 +1,21 @@
-const { checkoutOrder } = require('../../controllers/handlers/orders')
+const {
+  checkoutCart,
+  updateCart,
+} = require('../../controllers/handlers/cart')
 const { errorResponse } = require('../../utils/responseUtil')
 
-const checkoutOrderService = async (req, res, next) => {
+const checkoutCartService = async (req, res, next) => {
   try {
-    const data = await checkoutOrder(req)
+    const data = checkoutCart(req)
+    return successResponse(res, data)
+  } catch (error) {
+    return errorResponse(next, error)
+  }
+}
+
+const updateCartService = async (req, res, next) => {
+  try {
+    const data = updateCart(req)
     return successResponse(res, data)
   } catch (error) {
     return errorResponse(next, error)
@@ -11,5 +23,6 @@ const checkoutOrderService = async (req, res, next) => {
 }
 
 module.exports = {
-  checkoutOrderService,
+  checkoutCartService,
+  updateCartService,
 }
