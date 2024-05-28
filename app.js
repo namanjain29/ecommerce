@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser')
 const http = require('http')
 const cors = require('cors')
 const routes = require('./routes')
-const { SERVER_PORT, ENV } = require('./settings')
+const { SERVER_PORT } = require('./settings')
 const {
   notFoundError,
   onAppError,
