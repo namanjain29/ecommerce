@@ -9,4 +9,10 @@ router.post(
   Service.checkoutCartService
 )
 
+router.post(
+  '/updateCart',
+  Validation.updateCartValidation,
+  Service.updateCartService
+)
+
 module.exports = router

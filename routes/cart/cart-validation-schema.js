@@ -9,9 +9,14 @@ const checkoutCartValidationSchema = Joi.object({
   }).required(),
   paymentMethod: Joi.string().allow('online', 'cash').required(),
   couponCode: Joi.string(),
-  shippingPrice: Joi.number().required(),
+})
+
+const updateCartValidationSchema = Joi.object({
+  productId: Joi.string().required(),
+  event: Joi.string().allow('add', 'delete').required(),
 })
 
 module.exports = {
   checkoutCartValidationSchema,
+  updateCartValidationSchema
 }
