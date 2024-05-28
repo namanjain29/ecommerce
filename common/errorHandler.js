@@ -43,8 +43,17 @@ const onServerError = (error) => {
   }
 }
 
+const throwError = (errorMessage, errorCode) => {
+  const error = new Error(errorMessage)
+  error.code = errorCode
+  throw error
+}
+
+module.exports = QBError
+
 module.exports = {
   notFoundError,
   onAppError,
   onServerError,
+  throwError,
 }
