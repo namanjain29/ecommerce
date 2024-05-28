@@ -1,6 +1,6 @@
 const { ERROR_CODE } = require('../common/httpCodeDetails')
 
-const successResponse = async (res, data, httpCode = 200) => {
+const successResponse =  (res, data, httpCode = 200) => {
   if (res && res.connection) {
     const response = { status: true, data }
     return res.status(httpCode).json(response)
@@ -8,7 +8,7 @@ const successResponse = async (res, data, httpCode = 200) => {
   return data // For Jest testing
 }
 
-const errorResponse = async (next, error) => {
+const errorResponse =  (next, error) => {
   if (next) {
     return next(error)
   }
