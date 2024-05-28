@@ -1,3 +1,4 @@
+const { validateSchema } = require('../../utils/validationUtil')
 const {
   getAllCouponsValidationSchema,
   validateCouponValidationSchema,

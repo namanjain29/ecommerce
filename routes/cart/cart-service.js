@@ -1,9 +1,9 @@
-const { createOrder } = require('../../controllers/handlers/orders')
+const { checkoutOrder } = require('../../controllers/handlers/orders')
 const { errorResponse } = require('../../utils/responseUtil')
 
-const createOrderService = async (req, res, next) => {
+const checkoutOrderService = async (req, res, next) => {
   try {
-    const data = await createOrder(req)
+    const data = await checkoutOrder(req)
     return successResponse(res, data)
   } catch (error) {
     return errorResponse(next, error)
@@ -11,5 +11,5 @@ const createOrderService = async (req, res, next) => {
 }
 
 module.exports = {
-  createOrderService,
+  checkoutOrderService,
 }
