@@ -1,7 +1,16 @@
-# RUNNING THE PROJECT
+
+# SETUP
 1. use node version v14.19
-2. npm run install  (install the dependencies)
-3. npm run start (start project)
+2. create config.json file
+    ```{
+        "SERVER_PORT": 8000,
+        "ENV": "dev",
+        "INTERNAL_API_KEY": "xyzabc"
+        }```
+        
+# RUNNING THE PROJECT
+1. npm run install  (install the dependencies)
+2. npm run start (start project)
 
 # PRETTIFY CODE
 1. npm run format
