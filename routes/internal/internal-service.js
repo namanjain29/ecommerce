@@ -1,12 +1,13 @@
 const {
   generateCouponByAdmin,
-} = require('../../controllers/handlers/coupon')
-const { errorResponse } = require('../../utils/responseUtil')
+} = require('../../controllers/handlers/coupon');
+const { generateStoreStats } = require('../../controllers/handlers/store');
+const { errorResponse, successResponse } = require('../../utils/responseUtil')
 
 const generateCouponService =  (req, res, next) => {
   try {
     const { body } = req;
-    const userId = body
+    const { userId } = body
     const discountPercent = 10;
     const data = generateCouponByAdmin({
       userId,

@@ -15,4 +15,10 @@ router.post(
   Service.updateCartService
 )
 
+router.get(
+  '/fetchCart',
+  Validation.cartValidation,
+  Service.cartService
+)
+
 module.exports = router

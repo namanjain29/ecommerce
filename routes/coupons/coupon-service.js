@@ -2,7 +2,7 @@ const {
   validateCoupon,
   getAllCouponsForUser,
 } = require('../../controllers/handlers/coupon')
-const { errorResponse } = require('../../utils/responseUtil')
+const { errorResponse, successResponse } = require('../../utils/responseUtil')
 
 const getAllCouponsService = (req, res, next) => {
   try {

@@ -12,9 +12,13 @@ const { generateCoupon } = require('./coupon')
 const checkoutCart = (req) => {
   const { body, headers } = req
   const userId = headers['user-id']
-  const { orderItems, couponCode } = body
+  const { couponCode } = body
   let totalBillAmount = 0
   const userProductsCart = inMemoryCart[userId]
+  // check if the cart is empty
+  if(!userProductsCart || userProductsCart.length === 0){
+    throwError('Cart is empty', 400)
+  }
   // assuming taxes are included in the price of the items
   userProductsCart.forEach((item) => {
     // check if the items are available in the store
@@ -33,7 +37,7 @@ const checkoutCart = (req) => {
     // check if the coupon code is valid for the user
     const couponObj = inMemoryCouponCodes.find(
       (obj) =>
-        obj.code === discountCode &&
+        obj.code === couponCode &&
         obj.userId === userId &&
         obj.status === couponCodeStatus.ACTIVE
     )
@@ -45,8 +49,8 @@ const checkoutCart = (req) => {
   const finalBillAmount = totalBillAmount - discount
   const order = {
     userId,
-    orderItems,
-    discountCode,
+    orderItems: userProductsCart,
+    couponCode,
     totalBillAmount,
     discount,
     finalBillAmount,
@@ -61,9 +65,15 @@ const checkoutCart = (req) => {
   inMemoryCart[userId] = []
 
   // update the countInStock of the items in the store
-  orderItems.forEach((item) => {
+  userProductsCart.forEach((item) => {
     const dbItem = inMemoryItems.find((dbItem) => dbItem.id === item.productId)
-    dbItem.countInStock -= item.quantity
+    // check if the items are available in the store
+    if (dbItem.countInStock < item.quantity) { 
+      throwError(`${item.name} out of stock`, 400);
+    } else {
+      dbItem.countInStock -= item.quantity
+    }
+      
   })
 
   // generate coupon code for the user for every nth order
@@ -96,7 +106,7 @@ const updateCart = (req) => {
   )
 
   // if product in already present in the cart
-  if(productAlreadyPresentInCartIndex){
+  if(productAlreadyPresentInCartIndex !== -1){
     if (event === 'add') {
       userProductsCart[productAlreadyPresentInCartIndex].quantity += 1;
     } else {
@@ -119,12 +129,21 @@ const updateCart = (req) => {
       throwError('Cannot remove, product not found in cart!', 400)
     }
   }
+  inMemoryCart[userId] = userProductsCart;
   return {
     message: 'Cart Succesfully updated!'
   }
 };
 
+const getCart = (req) => {
+  const { headers } = req;
+  const userId = headers['user-id'];
+  const userProductsCart = inMemoryCart[userId] || [];
+  return userProductsCart;
+}
+
 module.exports = {
   checkoutCart,
   updateCart,
+  getCart,
 }

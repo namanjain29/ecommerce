@@ -1,8 +1,9 @@
 const {
   checkoutCart,
   updateCart,
+  getCart,
 } = require('../../controllers/handlers/cart')
-const { errorResponse } = require('../../utils/responseUtil')
+const { errorResponse, successResponse } = require('../../utils/responseUtil')
 
 const checkoutCartService =  (req, res, next) => {
   try {
@@ -22,7 +23,17 @@ const updateCartService =  (req, res, next) => {
   }
 }
 
+const cartService = (req, res, next) => {
+  try {
+    const data = getCart(req)
+    return successResponse(res, data)
+  } catch (error) {
+    return errorResponse(next, error)
+  }
+}
+
 module.exports = {
   checkoutCartService,
   updateCartService,
+  cartService,
 }
