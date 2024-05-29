@@ -53,6 +53,7 @@ config.json
 .vscode/
 
 #package.lock ignore
+package-lock.json
 jest-stare
 test/jest-html-reporters-attach
 test/*.html
