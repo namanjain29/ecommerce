@@ -1,11 +1,13 @@
 const { throwError } = require('../../common/errorHandler')
 const { couponCodeStatus } = require('../../constants')
-const { discountCodes: inMemoryDiscountCodes } = require('../../inMemDb')
-const { generateCouponCode } = require('../../utils/coupons')
+const { couponCodes: inMemoryDiscountCodes } = require('../../inMemDb')
+const { generateCouponCode } = require('../../utils/couponsUtil')
+const { orders: inMemoryOrders } = require('../../inMemDb')
+const { ORDER_MULTIPLE_FOR_COUPON_CODE } = require('../../settings')
 
 const generateCoupon =  (params) => {
   const { userId, discountPercent } = params
-  const couponCode = generateCouponCode(body)
+  const couponCode = generateCouponCode()
   const couponCodeObject = {
     userId,
     couponCode,
@@ -44,7 +46,7 @@ const validateCoupon =  (req) => {
   if (!couponCodeObject) {
     throw new Error('Invalid coupon code')
   }
-  return couponCodeObject
+  return { message: 'Coupon code is valid' }
 }
 
 const getAllCouponsForUser = (req) => {

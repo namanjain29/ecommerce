@@ -8,7 +8,7 @@ router.post(
   Validation.generateCouponValidation,
   Service.generateCouponService
 )
-router.get(
+router.post(
   '/store/stats',
   Validation.storeStatsValidation,
   Service.storeStatsService

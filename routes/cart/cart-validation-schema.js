@@ -16,7 +16,10 @@ const updateCartValidationSchema = Joi.object({
   event: Joi.string().allow('add', 'delete').required(),
 })
 
+const cartValidationSchema = Joi.object({})
+
 module.exports = {
   checkoutCartValidationSchema,
-  updateCartValidationSchema
+  updateCartValidationSchema,
+  cartValidationSchema,
 }

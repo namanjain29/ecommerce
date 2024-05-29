@@ -1,17 +1,23 @@
 const express = require('express')
 const cartRoutes = require('./cart/cart-routes')
 const couponRoutes = require('./coupons/coupon-routes')
-const router = express.Router()
-const { throwError } = require('../common/errorHandler')
+const internalRoutes = require('./internal/internal-routes')
 
-const validateHeaders = (headers) => {
-  if (!headers['user-id']) {
-    return throwError(`Request header does not have user-id`, ERROR_CODE.NOT_FOUND);
+const { throwError } = require('../common/errorHandler')
+const { ERROR_CODE } = require('../common/httpCodeDetails')
+
+const validateHeaders = (req, res, next) => {
+  if (!req.headers['user-id']) {
+    return throwError(
+      `Request header does not have user-id`,
+      ERROR_CODE.NOT_FOUND
+    )
   }
-  return null;
+  next();
 }
 // for admin routes
-app.use('/internal', internalRoutes)
+const router = express.Router()
+router.use('/internal', internalRoutes)
 router.use('/cart', validateHeaders, cartRoutes);
 router.use('/coupon', validateHeaders, couponRoutes);
 
