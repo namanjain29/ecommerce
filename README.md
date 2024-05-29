@@ -1,15 +1,12 @@
-# ecommerce
-
-<!-- RUNNING THE PROJECT -->
-
+# RUNNING THE PROJECT
 1. use node version v14.19
-2. npm run install
-3. npm run start
+2. npm run install  (install the dependencies)
+3. npm run start (start project)
 
-<!-- prettify code -->
+# PRETTIFY CODE
 1. npm run format
 
-<!-- FOLDER STRUCTURE -->
+# FOLDER STRUCTURE
 - routes
     - route category
         - routes (contains all the routes for the category)
