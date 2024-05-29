@@ -1,5 +1,0 @@
-{
-  "SERVER_PORT": 8000,
-  "ENV": "dev",
-  "INTERNAL_API_KEY": "xyzabc"
-}
