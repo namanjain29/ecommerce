@@ -1,13 +1,13 @@
-const Joi = require('joi')
+const Joi = require('joi');
 
 const storeStatsValidationSchema = Joi.object({
-  userId: Joi.string().required(),
-})
+    userId: Joi.string().required(),
+});
 const generateCouponValidationSchema = Joi.object({
-  userId: Joi.string().required(),
-})
+    userId: Joi.string().required(),
+});
 
 module.exports = {
-  storeStatsValidationSchema,
-  generateCouponValidationSchema,
-}
+    storeStatsValidationSchema,
+    generateCouponValidationSchema,
+};
