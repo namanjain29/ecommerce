@@ -20,7 +20,7 @@
 //     paymentMethod: string,
 //     status: string,
 // }
-const orders = []
+const orders = [];
 
 // itemsInStore schema
 // {
@@ -31,37 +31,37 @@ const orders = []
 // }
 
 const items = [
-  {
-    id: '1',
-    name: 'Product 1',
-    price: 100,
-    countInStock: 10,
-  },
-  {
-    id: '2',
-    name: 'Product 2',
-    price: 200,
-    countInStock: 0,
-  },
-  {
-    id: '3',
-    name: 'Product 3',
-    price: 300,
-    countInStock: 30,
-  },
-  {
-    id: '4',
-    name: 'Product 4',
-    price: 400,
-    countInStock: 40,
-  },
-  {
-    id: '5',
-    name: 'Product 5',
-    price: 500,
-    countInStock: 50,
-  },
-]
+    {
+        id: '1',
+        name: 'Product 1',
+        price: 100,
+        countInStock: 10,
+    },
+    {
+        id: '2',
+        name: 'Product 2',
+        price: 200,
+        countInStock: 0,
+    },
+    {
+        id: '3',
+        name: 'Product 3',
+        price: 300,
+        countInStock: 30,
+    },
+    {
+        id: '4',
+        name: 'Product 4',
+        price: 400,
+        countInStock: 40,
+    },
+    {
+        id: '5',
+        name: 'Product 5',
+        price: 500,
+        countInStock: 50,
+    },
+];
 
 // couponCodes schema
 // {
@@ -70,7 +70,7 @@ const items = [
 //     status: string,
 //     discountPercent: number,
 // }
-const couponCodes = []
+const couponCodes = [];
 
 // cart Schema
 // {
@@ -82,11 +82,11 @@ const couponCodes = []
 //   ]
 // }
 
-const cart = {}
+const cart = {};
 
 module.exports = {
-  orders,
-  items,
-  couponCodes,
-  cart,
-}
+    orders,
+    items,
+    couponCodes,
+    cart,
+};

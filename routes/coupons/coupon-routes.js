@@ -1,17 +1,17 @@
-const express = require('express')
-const Validation = require('./coupon-validations')
-const Service = require('./coupon-service')
+const express = require('express');
+const Validation = require('./coupon-validations');
+const Service = require('./coupon-service');
 
-const router = express.Router()
+const router = express.Router();
 router.post(
-  '/validate',
-  Validation.validateCouponValidation,
-  Service.validateCouponService
-)
+    '/validate',
+    Validation.validateCouponValidation,
+    Service.validateCouponService
+);
 router.get(
-  '/getAll',
-  Validation.getAllCouponsValidation,
-  Service.getAllCouponsService
-)
+    '/getAll',
+    Validation.getAllCouponsValidation,
+    Service.getAllCouponsService
+);
 
-module.exports = router
+module.exports = router;
