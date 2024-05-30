@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "65fbf9f8-ca33-4bef-9088-242f0bd17900",
+		"name": "E-commerce Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "19295094"
+	},
+	"item": [
+		{
+			"name": "CART",
+			"item": [
+				{
+					"name": "GET CART",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "user-id",
+								"value": "1"
+							}
+						],
+						"url": "http://0.0.0.0:8000/api/cart/fetchCart"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE PRODUCT IN CART",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "user-id",
+								"value": "1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\": \"1\",\n    \"event\": \"add\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://0.0.0.0:8000/api/cart/updateCart"
+					},
+					"response": []
+				},
+				{
+					"name": "CHECKOUT CART",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "user-id",
+								"value": "1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"shippingAddress\": {\n        \"address\": \"House number 23\",\n        \"city\": \"Delhi\",\n        \"postalCode\": \"110011\",\n        \"country\": \"india\"\n    },\n    \"paymentMethod\": \"online\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://0.0.0.0:8000/api/cart/checkout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "COUPON",
+			"item": [
+				{
+					"name": "GET ALL COUPON",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "user-id",
+								"value": "1"
+							}
+						],
+						"url": "http://0.0.0.0:8000/api/coupon/getAll"
+					},
+					"response": []
+				},
+				{
+					"name": "VALIDATE COUPON",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "user-id",
+								"value": "1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"couponCode\": \"2E21E815C24600C763379074\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://0.0.0.0:8000/api/coupon/validate"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "GENERATE COUPON",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "api-key",
+								"value": "xyzabc"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://0.0.0.0:8000/api/internal/store/generateCoupon"
+					},
+					"response": []
+				},
+				{
+					"name": "USER STATS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "api-key",
+								"value": "xyzabc"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://0.0.0.0:8000/api/internal/store/stats"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
