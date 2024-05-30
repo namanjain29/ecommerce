@@ -1,8 +1,8 @@
 const { orders: inMemoryOrders, couponCodes } = require('../../inMemDb')
 
 const generateStoreStats = (req) => {
-  const { body } = req;
-  const { userId } = body;
+  const { body } = req
+  const { userId } = body
   const userOrders = inMemoryOrders.filter((order) => order.userId === userId)
   const totalPurchaseAmount = userOrders.reduce(
     (sum, order) => sum + order.totalBillAmount,
@@ -12,9 +12,10 @@ const generateStoreStats = (req) => {
     (sum, order) => sum + (order.totalBillAmount - order.finalBillAmount),
     0
   )
-  
+
   const totalItemsPurchased = userOrders.reduce(
-    (sum, order) => sum + order.orderItems.reduce((sum, item) => sum + item.quantity, 0),
+    (sum, order) =>
+      sum + order.orderItems.reduce((sum, item) => sum + item.quantity, 0),
     0
   )
 

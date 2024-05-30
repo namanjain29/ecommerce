@@ -1,21 +1,19 @@
-const {
-  generateCouponByAdmin,
-} = require('../../controllers/handlers/coupon');
-const { generateStoreStats } = require('../../controllers/handlers/store');
+const { generateCouponByAdmin } = require('../../controllers/handlers/coupon')
+const { generateStoreStats } = require('../../controllers/handlers/store')
 const { errorResponse, successResponse } = require('../../utils/responseUtil')
 
-const generateCouponService =  (req, res, next) => {
+const generateCouponService = (req, res, next) => {
   try {
-    const { body } = req;
+    const { body } = req
     const { userId } = body
-    const discountPercent = 10;
+    const discountPercent = 10
     const data = generateCouponByAdmin({
       userId,
       discountPercent,
     })
-    return successResponse(res, data);
+    return successResponse(res, data)
   } catch (error) {
-    return errorResponse(next, error);
+    return errorResponse(next, error)
   }
 }
 
