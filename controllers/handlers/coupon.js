@@ -5,7 +5,7 @@ const { generateCouponCode } = require('../../utils/couponsUtil')
 const { orders: inMemoryOrders } = require('../../inMemDb')
 const { ORDER_MULTIPLE_FOR_COUPON_CODE } = require('../../settings')
 
-const generateCoupon =  (params) => {
+const generateCoupon = (params) => {
   const { userId, discountPercent } = params
   const couponCode = generateCouponCode()
   const couponCodeObject = {
@@ -14,8 +14,8 @@ const generateCoupon =  (params) => {
     discountPercent,
     status: couponCodeStatus.ACTIVE,
   }
-  inMemoryDiscountCodes.push(couponCodeObject);
-  return couponCodeObject;
+  inMemoryDiscountCodes.push(couponCodeObject)
+  return couponCodeObject
 }
 
 const generateCouponByAdmin = (params) => {
@@ -23,18 +23,21 @@ const generateCouponByAdmin = (params) => {
   // generate coupon code for the user for every nth order
   const totalOrdersOfUser = inMemoryOrders.filter(
     (order) => order.userId === userId
-  ).length;
-  if ((totalOrdersOfUser) % ORDER_MULTIPLE_FOR_COUPON_CODE === 0 && totalOrdersOfUser > 0) {
+  ).length
+  if (
+    totalOrdersOfUser % ORDER_MULTIPLE_FOR_COUPON_CODE === 0 &&
+    totalOrdersOfUser > 0
+  ) {
     return generateCoupon({
       userId,
       discountPercent,
     })
   } else {
-    throwError('Cannot generate coupon for this user', 500);
+    throwError('Cannot generate coupon for this user', 500)
   }
 }
 
-const validateCoupon =  (req) => {
+const validateCoupon = (req) => {
   const { couponCode } = req.body
   const userId = req.headers['user-id']
   const couponCodeObject = inMemoryDiscountCodes.find(
@@ -55,7 +58,7 @@ const getAllCouponsForUser = (req) => {
     (coupon) =>
       coupon.userId === userId && coupon.status === couponCodeStatus.ACTIVE
   )
-  return userCoupons;
+  return userCoupons
 }
 
 module.exports = {

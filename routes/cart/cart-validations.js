@@ -17,7 +17,7 @@ const updateCartValidation = (req, res, next) => {
   return next()
 }
 
-const cartValidation = (req, res, next) => { 
+const cartValidation = (req, res, next) => {
   const { body } = req
   validateSchema(cartValidationSchema, body, res)
   return next()

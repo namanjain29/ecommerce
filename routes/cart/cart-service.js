@@ -5,7 +5,7 @@ const {
 } = require('../../controllers/handlers/cart')
 const { errorResponse, successResponse } = require('../../utils/responseUtil')
 
-const checkoutCartService =  (req, res, next) => {
+const checkoutCartService = (req, res, next) => {
   try {
     const data = checkoutCart(req)
     return successResponse(res, data)
@@ -14,7 +14,7 @@ const checkoutCartService =  (req, res, next) => {
   }
 }
 
-const updateCartService =  (req, res, next) => {
+const updateCartService = (req, res, next) => {
   try {
     const data = updateCart(req)
     return successResponse(res, data)

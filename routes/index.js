@@ -14,7 +14,7 @@ const validateHeaders = (req, res, next) => {
       ERROR_CODE.NOT_FOUND
     )
   }
-  next();
+  next()
 }
 
 const validateInternalApi = (req, res, next) => {
@@ -30,7 +30,7 @@ const validateInternalApi = (req, res, next) => {
 // for admin routes
 const router = express.Router()
 router.use('/internal', validateInternalApi, internalRoutes)
-router.use('/cart', validateHeaders, cartRoutes);
-router.use('/coupon', validateHeaders, couponRoutes);
+router.use('/cart', validateHeaders, cartRoutes)
+router.use('/coupon', validateHeaders, couponRoutes)
 
-module.exports = router;
+module.exports = router

@@ -20,7 +20,7 @@
 //     paymentMethod: string,
 //     status: string,
 // }
-const orders = [];
+const orders = []
 
 // itemsInStore schema
 // {
@@ -41,7 +41,7 @@ const items = [
     id: '2',
     name: 'Product 2',
     price: 200,
-    countInStock: 20,
+    countInStock: 0,
   },
   {
     id: '3',
@@ -61,7 +61,7 @@ const items = [
     price: 500,
     countInStock: 50,
   },
-];
+]
 
 // couponCodes schema
 // {
@@ -72,9 +72,8 @@ const items = [
 // }
 const couponCodes = []
 
-
 // cart Schema
-// { 
+// {
 //   userId: [
 //     {
 //       productId: string,
@@ -83,7 +82,7 @@ const couponCodes = []
 //   ]
 // }
 
-const cart = {};
+const cart = {}
 
 module.exports = {
   orders,

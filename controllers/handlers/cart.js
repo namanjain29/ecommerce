@@ -16,7 +16,7 @@ const checkoutCart = (req) => {
   let totalBillAmount = 0
   const userProductsCart = inMemoryCart[userId]
   // check if the cart is empty
-  if(!userProductsCart || userProductsCart.length === 0){
+  if (!userProductsCart || userProductsCart.length === 0) {
     throwError('Cart is empty', 400)
   }
   // assuming taxes are included in the price of the items
@@ -24,7 +24,7 @@ const checkoutCart = (req) => {
     // check if the items are available in the store
     const dbItem = inMemoryItems.find((dbItem) => dbItem.id === item.productId)
     if (!dbItem) {
-      throwError('Item not found', 404)
+      throwError('Item not found', 400)
     }
     if (dbItem.countInStock < item.quantity) {
       throwError('Item out of stock', 400)
@@ -43,8 +43,17 @@ const checkoutCart = (req) => {
     )
     if (!couponObj) {
       throwError('Invalid coupon code', 400)
+    } else {
+      // disable the coupon code after using it
+      const couponIndex = inMemoryCouponCodes.findIndex(
+        (obj) =>
+          obj.code === couponCode &&
+          obj.userId === userId &&
+          obj.status === couponCodeStatus.ACTIVE
+      )
+      inMemoryCouponCodes[couponIndex].status = couponCodeStatus.USED
     }
-    discount = (totalBillAmount * discountObj.discountPercent) / 100
+    discount = (totalBillAmount * couponObj.discountPercent) / 100
   }
   const finalBillAmount = totalBillAmount - discount
   const order = {
@@ -68,12 +77,11 @@ const checkoutCart = (req) => {
   userProductsCart.forEach((item) => {
     const dbItem = inMemoryItems.find((dbItem) => dbItem.id === item.productId)
     // check if the items are available in the store
-    if (dbItem.countInStock < item.quantity) { 
-      throwError(`${item.name} out of stock`, 400);
+    if (dbItem.countInStock < item.quantity) {
+      throwError(`${item.name} out of stock`, 400)
     } else {
       dbItem.countInStock -= item.quantity
     }
-      
   })
 
   // generate coupon code for the user for every nth order
@@ -92,23 +100,23 @@ const checkoutCart = (req) => {
 }
 
 const updateCart = (req) => {
-  const { body, headers } = req;
-  const userId = headers['user-id'];
-  const { productId, event } = body;
+  const { body, headers } = req
+  const userId = headers['user-id']
+  const { productId, event } = body
   const product = inMemoryItems.find((dbItem) => dbItem.id === productId)
-    // check if product is present or if event is add, then quantity in store should be grater than 1
+  // check if product is present or if event is add, then quantity in store should be grater than 1
   if (!product || (product.countInStock < 1 && event === 'add')) {
     throwError('Product not found', 400)
   }
-  let userProductsCart = inMemoryCart[userId] || [];
+  let userProductsCart = inMemoryCart[userId] || []
   const productAlreadyPresentInCartIndex = userProductsCart.findIndex(
     (product) => product.productId === productId
   )
 
   // if product in already present in the cart
-  if(productAlreadyPresentInCartIndex !== -1){
+  if (productAlreadyPresentInCartIndex !== -1) {
     if (event === 'add') {
-      userProductsCart[productAlreadyPresentInCartIndex].quantity += 1;
+      userProductsCart[productAlreadyPresentInCartIndex].quantity += 1
     } else {
       // if only one quantity is present then remove the product from cart
       if (userProductsCart[productAlreadyPresentInCartIndex].quantity === 1) {
@@ -116,30 +124,30 @@ const updateCart = (req) => {
           (product) => product.productId !== productId
         )
       } else {
-        userProductsCart[productAlreadyPresentInCartIndex].quantity += 1;
+        userProductsCart[productAlreadyPresentInCartIndex].quantity -= 1
       }
-    } 
+    }
   } else {
     if (event === 'add') {
       userProductsCart.push({
         productId,
-        quantity: 1
+        quantity: 1,
       })
     } else {
       throwError('Cannot remove, product not found in cart!', 400)
     }
   }
-  inMemoryCart[userId] = userProductsCart;
+  inMemoryCart[userId] = userProductsCart
   return {
-    message: 'Cart Succesfully updated!'
+    message: 'Cart Successfully updated!',
   }
-};
+}
 
 const getCart = (req) => {
-  const { headers } = req;
-  const userId = headers['user-id'];
-  const userProductsCart = inMemoryCart[userId] || [];
-  return userProductsCart;
+  const { headers } = req
+  const userId = headers['user-id']
+  const userProductsCart = inMemoryCart[userId] || []
+  return userProductsCart
 }
 
 module.exports = {
